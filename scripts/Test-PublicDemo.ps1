@@ -26,6 +26,13 @@ $rules = [ordered]@{
 }
 foreach ($file in $files) {
   $relative = $file.FullName.Substring($rootPrefix.Length).Replace('\','/')
+  if ($relative -in @('assets/social/og-taller-os-v1.webp','assets/social/og-taller-os-v1.jpg')) {
+    $expected = if ($manifest.approvedImages) { $manifest.approvedImages.PSObject.Properties[$relative].Value } else { '' }
+    if ($relative -notin $allowed -or $expected -notmatch '^[a-fA-F0-9]{64}$' -or $file.Length -gt 250KB -or (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash -ne $expected) {
+      $failures.Add("Imagen promocional no aprobada o modificada: $relative")
+    }
+    continue
+  }
   if ($relative -match '(?i)(^|/)(\.env[^/]*|config\.local\.js|private-data|customer-data|uploads|photos|evidence|documents|exports|backups|credentials|secrets)(/|$)|\.(pem|key|p12|pfx|csv|xlsx?|pdf|docx?|ods|jpe?g|png|webp|hei[cf]|avif|gif|tiff?|dng|raw|dump|backup|sqlite\d*|db|har|zip|log)$') {
     $failures.Add("Archivo privado prohibido: $relative"); continue
   }

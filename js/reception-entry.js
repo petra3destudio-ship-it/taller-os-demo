@@ -9,8 +9,6 @@
   document.querySelector('#capturePanel .actions').before(section);
   const originalCurrent=window.current;
   window.current=()=>({...originalCurrent(),budget:document.getElementById('receptionBudget').value,delivery:document.getElementById('receptionDelivery').value,inventory:document.getElementById('receptionInventory').value});
-  const entry=document.createElement('a');entry.href='recepcion.html';entry.className='btn';entry.textContent='Recepción Digital Interactiva · ejemplo';entry.style.textDecoration='none';
-  document.querySelector('#dashboardPanel .actions').append(entry);
   document.querySelector('[data-tab="pdf"]').textContent='Ficha PDF · herramienta anterior';
   const saveButton=document.querySelector('#capturePanel button[onclick="save()"]');
   saveButton.textContent='Guardar demo y revisar recepción digital';

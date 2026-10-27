@@ -5,6 +5,7 @@
     "config.js",
     "css/recepcion.css",
     "js/demo-privacy.js",
+    "js/app.js",
     "js/dashboard.js",
     "js/reception-entry.js",
     "js/recepcion.js",
@@ -13,6 +14,12 @@
     "README.md",
     ".publicdemo-manifest.json",
     "scripts/Test-PublicDemo.ps1",
-    ".github/workflows/demo-safety.yml"
-  ]
+    ".github/workflows/demo-safety.yml",
+    "assets/social/og-taller-os-v1.webp",
+    "assets/social/og-taller-os-v1.jpg"
+  ],
+  "approvedImages": {
+    "assets/social/og-taller-os-v1.webp": "259b89292e18088a2e08b7d94715c073efc69dc5d5db4a87d467514a298e97ef",
+    "assets/social/og-taller-os-v1.jpg": "6dc00669f70064a5d295615e40cd653ae15f770a33981632080f5811fc1a439c"
+  }
 }

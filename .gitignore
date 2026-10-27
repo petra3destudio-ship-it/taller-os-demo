@@ -79,3 +79,7 @@ backup*.sql
 test-results/
 playwright-report/
 supabase/.branches/
+
+# Solo estas dos imágenes promocionales fueron aprobadas para publicación.
+!assets/social/og-taller-os-v1.webp
+!assets/social/og-taller-os-v1.jpg
