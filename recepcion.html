@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer"><meta name="robots" content="noindex,nofollow">
+  <title>Recepción Digital Interactiva · TALLER OS</title>
+  <link rel="stylesheet" href="css/recepcion.css">
+</head>
+<body>
+<header><a href="index.html" aria-label="Volver a TALLER OS">↗ TALLER <span>OS</span></a><span class="badge">DEMOSTRACIÓN</span></header>
+<main>
+  <aside class="notice">Recepción ficticia. Sin envío a Supabase ni verificación real de identidad. Las cláusulas son ejemplos; no constituyen un contrato para uso comercial.</aside>
+  <nav class="mode" aria-label="Vista del expediente"><button id="staffMode" aria-pressed="true">1. Preparar recepción</button><button id="clientMode" aria-pressed="false">2. Vista del cliente</button></nav>
+  <section id="staffPanel" class="card">
+    <p class="eyebrow">RECEPCIÓN DIGITAL INTERACTIVA</p><h1>Todo claro desde el ingreso.</h1><p>Prepara la información y revisa la experiencia que verá el cliente antes de aceptar.</p>
+    <form id="draftForm">
+      <div class="fields">
+        <label>Servicio solicitado<textarea name="service" required maxlength="2000"></textarea></label>
+        <label>Presupuesto estimado (MXN)<input name="budget" type="number" min="0" max="99999999" step="0.01" required></label>
+        <label>Entrega estimada (hora de Ciudad de México)<input name="delivery" type="datetime-local" required></label>
+        <label>Inventario recibido<textarea name="inventory" required maxlength="3000"></textarea></label>
+        <label>Observaciones de recepción<textarea name="notes" maxlength="3000"></textarea></label>
+        <label>Agregar fotografías locales (máximo 8, hasta 5 MB cada una)<input id="photoInput" type="file" accept="image/jpeg,image/png,image/webp" multiple></label>
+      </div>
+      <p id="photoStatus" role="status"></p>
+      <div class="notice" id="correctionSummary" hidden></div>
+      <button class="primary" id="prepareButton">Guardar borrador demo y revisar</button>
+    </form>
+    <p class="muted">El borrador y las imágenes viven solo en esta pestaña. No se genera un enlace privado real en esta fase.</p>
+  </section>
+  <article id="clientPanel" hidden aria-label="Expediente de recepción">
+    <section class="hero"><p class="eyebrow">TU VEHÍCULO, DOCUMENTADO</p><h1>Revisa tu recepción.</h1><p>Fotografías, condiciones y servicio en un solo lugar.</p><div class="hero-meta"><strong id="folioLabel"></strong><span id="versionLabel"></span></div><p id="stateLabel" role="status"></p></section>
+    <nav class="quick-links" aria-label="Secciones"><a href="#vehicleSection">Vehículo</a><a href="#photosSection">Fotos</a><a href="#damageSection">Daños</a><a href="#termsSection">Contrato</a><a href="#acceptSection">Confirmación</a></nav>
+    <section class="card" id="vehicleSection"><p class="eyebrow">01 / RECEPCIÓN</p><h2>Datos del vehículo y cliente</h2><dl id="vehicleData"></dl></section>
+    <section class="card"><p class="eyebrow">02 / SERVICIO</p><h2>Servicio y entrega</h2><p id="serviceText"></p><div class="summary-grid"><div><span>Presupuesto estimado</span><strong id="budgetText"></strong></div><div><span>Fecha estimada de entrega</span><strong id="deliveryText"></strong></div></div><p class="muted">Cualquier trabajo adicional requiere autorización previa. La fecha es estimada.</p></section>
+    <section class="card" id="photosSection"><p class="eyebrow">03 / EVIDENCIA</p><h2>Fotografías de recepción</h2><p class="muted">Selecciona una imagen para ampliarla. Las ilustraciones iniciales son ficticias.</p><div class="gallery" id="photoGallery"></div></section>
+    <section class="card" id="damageSection"><p class="eyebrow">04 / INSPECCIÓN</p><h2>Croquis interactivo</h2><p>Selecciona una marca o su descripción para consultar el hallazgo.</p><svg id="reviewCar" viewBox="0 0 600 300" role="img" aria-label="Vista superior del vehículo con marcas de daños"><g fill="#edf3fc" stroke="#1664d9" stroke-width="3"><rect x="90" y="55" width="420" height="190" rx="78"/><rect x="215" y="76" width="160" height="148" rx="25"/><path d="M215 76L185 108V192L215 224M375 76L420 105V195L375 224M295 76V224" fill="none"/><path d="M112 98V145M112 155V202M489 98V145M489 155V202" stroke="#e50914" stroke-width="8"/></g><g id="reviewMarks"></g></svg><div id="damageButtons" class="damage-list"></div><p id="damageInfo" class="notice" aria-live="polite">Selecciona un daño para ver su descripción.</p></section>
+    <section class="card" id="annexSection"><p class="eyebrow">05 / ANEXOS DE RECEPCIÓN</p><h2>Inventario y observaciones</h2><h3>Inventario</h3><p id="inventoryText" class="preserve"></p><h3>Observaciones</h3><p id="notesText" class="preserve"></p></section>
+    <section class="card" id="termsSection"><p class="eyebrow">06 / INFORMACIÓN PARA REVISAR</p><h2>Contrato y privacidad</h2><details open><summary>Contrato completo · ejemplo v1</summary><div id="contractText"><p>1. El taller recibe el vehículo y los bienes descritos en el inventario para realizar únicamente el servicio y presupuesto indicados en esta recepción.</p><p>2. El presupuesto es estimado. Cualquier diagnóstico, pieza o trabajo adicional debe informarse y autorizarse antes de ejecutarse.</p><p>3. La fecha de entrega es estimada. Los cambios se informarán al cliente. Las condiciones de pago, garantía y retiro deben acordarse expresamente antes de iniciar el servicio.</p><p>4. Al retirar el vehículo, el cliente revisará el trabajo y los bienes inventariados. Este ejemplo no establece cargos por almacenamiento ni autoriza renuncias a derechos.</p><p>5. Las correcciones previas a la aceptación requieren una nueva versión para revisión. Las evidencias y condiciones aceptadas deben conservarse con trazabilidad.</p><p class="notice">Texto demostrativo pendiente de revisión legal y de completar los datos e información comercial del taller. No utilizar como contrato real.</p></div></details><details><summary>Política de privacidad · ejemplo v1</summary><p>Esta demo no envía tus datos al servidor. Los archivos seleccionados se usan únicamente en esta pestaña y desaparecen al cerrarla o recargarla. No ingreses información personal real.</p><p>Antes de uso comercial deben identificarse el responsable, domicilio, finalidades, conservación, transferencias y medios para ejercer derechos y contactar al taller. La política definitiva formará parte de la versión revisada.</p></details><a href="#annexSection">Ver anexos de recepción</a></section>
+    <section class="card" id="correctionSection"><h2>¿Necesitas una corrección?</h2><form id="correctionForm"><label for="correctionText">Describe qué información debemos revisar</label><textarea id="correctionText" required minlength="10" maxlength="2000" placeholder="Ejemplo: falta registrar la herramienta del vehículo."></textarea><button class="secondary">Solicitar corrección en la demo</button></form><p id="correctionStatus" role="status"></p></section>
+    <section class="card" id="acceptSection"><p class="eyebrow">07 / CONFIRMACIÓN</p><h2>Revisa antes de confirmar.</h2><form id="acceptForm"><fieldset id="consentFields"><legend>Las tres confirmaciones son obligatorias</legend><label class="consent"><input type="checkbox" name="authorization" required><span>Confirmo que presenté mi tarjeta de circulación y estoy autorizado para solicitar el servicio.</span></label><label class="consent"><input type="checkbox" name="evidence" required><span>He revisado las fotografías, el inventario y los daños registrados en la recepción.</span></label><label class="consent"><input type="checkbox" name="terms" required><span>He leído y acepto las condiciones de servicio y retiro del vehículo.</span></label></fieldset><div class="notice"><strong>Verificación de identidad — simulación</strong><p>En producción se requerirá un código de un solo uso al contacto registrado. Este botón únicamente permite probar la interfaz; no acredita identidad.</p><button id="verifyDemo" type="button" class="secondary">Simular verificación de identidad</button><p id="verificationStatus" role="status">Identidad sin verificar.</p></div><button id="acceptButton" class="primary" disabled>Confirmar recepción ficticia</button></form><p id="acceptStatus" role="status"></p></section>
+    <section class="card" id="certificateSection" hidden><p class="eyebrow">CONSTANCIA DEMOSTRATIVA</p><h2>Tu revisión quedó registrada en esta demo.</h2><p id="certificateText"></p><p>Documento sin verificación real de identidad, firma electrónica ni registro en servidor. No acredita una aceptación contractual.</p><button id="printCertificate" class="primary">Guardar constancia demo como PDF</button><div class="share-actions"><button id="shareDemo" class="secondary">Compartir ejemplo por WhatsApp</button><button id="emailDemo" class="secondary">Compartir ejemplo por correo</button></div><p class="muted">Se comparte solo el ejemplo ficticio original. No se envía el expediente local ni una constancia privada.</p></section>
+  </article>
+  <p id="globalStatus" role="status" aria-live="polite"></p>
+</main>
+<dialog id="photoDialog"><button id="closePhoto" aria-label="Cerrar fotografía">Cerrar ×</button><img id="largePhoto" alt=""><p id="largeCaption"></p></dialog>
+<footer>TALLER OS · Recepción Digital Interactiva · <a href="index.html">Volver al taller</a></footer>
+<script src="js/recepcion.js" defer></script>
+</body></html>

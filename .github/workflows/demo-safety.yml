@@ -1,0 +1,20 @@
+name: Comprobar demo pública
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  safety:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar archivos y configuración de la demo
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if (Test-Path -LiteralPath 'scripts/Export-PublicDemo.ps1') {
+            ./scripts/Export-PublicDemo.ps1
+          } else {
+            ./scripts/Test-PublicDemo.ps1 -RootPath .
+          }

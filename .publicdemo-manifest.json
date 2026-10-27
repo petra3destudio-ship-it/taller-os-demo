@@ -1,0 +1,18 @@
+{
+  "files": [
+    "index.html",
+    "recepcion.html",
+    "config.js",
+    "css/recepcion.css",
+    "js/demo-privacy.js",
+    "js/dashboard.js",
+    "js/reception-entry.js",
+    "js/recepcion.js",
+    ".nojekyll",
+    ".gitignore",
+    "README.md",
+    ".publicdemo-manifest.json",
+    "scripts/Test-PublicDemo.ps1",
+    ".github/workflows/demo-safety.yml"
+  ]
+}
